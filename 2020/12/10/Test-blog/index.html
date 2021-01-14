@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一个私人博客">
+  <meta name="author" content="净量">
+  <meta name="keywords" content="">
+  <title>Hexo博客建立 - 珞珞博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/foundation.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.pluoluo.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Pluoluo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Hexo博客建立">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-10 18:07" pubdate>
+        2020年12月10日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hexo博客建立</h1>
+            
+            <div class="markdown-body">
+              <p>在用的两个笔记软件对记录代码和备查方面都不是完美的，在了解了Hexo之后决定建一个博客站试试。<br><br>因为折腾了nas，openwrt,vps这些东西,有很多的教程和代码要记录下来备查，对笔记软件多了一条代码的需求。<br><br>Onenote是个好的笔记软件，全平台都很方便，是我的主要的笔记空间，但在代码方面简直弱爆了，复制出来的代码经常运行出错。<br><br>后来拿到了公司电信送的服务器，带500M的空间，于是建了一个seafile服务器，seafile可以把资料库公开发布，使用md编辑文章，实时发布，接触了markdown，觉得是一个很方便的代码笔记手段。问题是，不去电信备案的话不能使用80好443，甚至不能接入域名，记不住ip的话，还得代理跳一下，seafile公开的web地址也不简洁，不太方便。</p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><ul>
+<li>web station</li>
+<li>php7.3</li>
+<li>nginx</li>
+<li>git server</li>
+<li>node.js<br><br>这些都可以在套件中心找到。</li>
+</ul>
+<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><ul>
+<li>ssh到nas，root账户登录</li>
+<li>输入代码<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install hexo-cli -g<br></code></pre></div></td></tr></table></figure></li>
+<li>cd 到一个想要建站的目录<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">hexo init blog 		 <span class="hljs-comment">#blog会成为博客站的根目录</span><br><span class="hljs-built_in">cd</span> blog<br>npm install<br>hexo s         	<span class="hljs-comment">#启动服务，此时可以通过4000端口打开后台，可以通过-p 参数指定端口</span><br>hexo g    		   <span class="hljs-comment">#生成静态网页，每次更改网页都需要运行此行</span><br></code></pre></div></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="web-station"><a href="#web-station" class="headerlink" title="web station"></a>web station</h4><ul>
+<li>新建一个虚拟主机</li>
+<li>虽然被封了，但是端口号最好加上80和443，再加其他的端口号</li>
+<li>路径选择刚才hexo创建的博客目录下的public</li>
+<li>勾选HSTS和http/2<br><img src="/2020/12/10/Test-blog/Virtual_host.png" srcset="/img/loading.gif" alt="img"></li>
+</ul>
+<h4 id="配置https"><a href="#配置https" class="headerlink" title="配置https"></a>配置https</h4><p>群晖可以方便的配置ssl</p>
+<ul>
+<li>去<a target="_blank" rel="noopener" href="https://freessl.cn/">freessl</a>申请证书。</li>
+<li>打开控制面板-安全-证书</li>
+<li>导入申请好的证书</li>
+<li>配置证书中选中刚才建好的主机</li>
+</ul>
+<br>
+此时博客站搭建完成，为更好的工作还需要配置一些插件和主题。
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="安装hexo-admin在线编辑"><a href="#安装hexo-admin在线编辑" class="headerlink" title="安装hexo-admin在线编辑"></a>安装hexo-admin在线编辑</h4><p>博客目录下</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npm install hexo-admin --save #安装hexo-admin插件<br>hexo s<br></code></pre></div></td></tr></table></figure>
+<p>现在可以通过“<a target="_blank" rel="noopener" href="http://localhost:4000/admin%E2%80%9D%E8%AE%BF%E9%97%AE%E5%90%8E%E5%8F%B0%E4%BA%86%E3%80%82">http://localhost:4000/admin”访问后台了。</a><br>转到导航的”settings”，可以生成密码代码<br><img src="https://img-blog.csdnimg.cn/20191204090912232.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25pbmV5YV9jb20=,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="图片"></p>
+<p>将下方的代码复制到博客的_config.yml中<br>在刚才的代码后面加一句：</p>
+<figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-attr">deployCommand:</span> <span class="hljs-string">&#x27;./admin_script.sh&#x27;</span>   <span class="hljs-comment">#设置部署脚本</span><br></code></pre></div></td></tr></table></figure>
+<p>在对应目录新建一个admin_script.sh，并赋运行权限，内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">hexo clean<br>hexo g<br></code></pre></div></td></tr></table></figure>
+<br>
+
+<h4 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h4><p>主题通常有两种安装方式</p>
+<ul>
+<li><p>直接下载主题到themes目录解压，然后在_config.yml中把theme改成主题目录名。</p>
+</li>
+<li><p>使用npm安装（以现在使用的主题fluid为例）</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npm install --save hexo-theme-fluid<br></code></pre></div></td></tr></table></figure>
+
+<p>然后在_config.yml中把theme改成主题目录名。</p>
+<p>为防止主题更新覆盖自定义设置，可以将主题文件夹中的_config.yml的内容复制到博客根目录的 _config.fluid.yml，此文件优先级比主题目录中的更高。</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cp node_modules\hexo-theme-fluid\_config.yml _config.fluid.yml<br></code></pre></div></td></tr></table></figure>
+
+<p>  <br></p>
+</li>
+</ul>
+<h4 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h4><p>有些操作记录并不想对外公开，于是安装了<a target="_blank" rel="noopener" href="https://github.com/D0n9X1n/hexo-blog-encrypt/blob/master/ReadMe.zh.md">加密插件</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npm install --save hexo-blog-encrypt<br></code></pre></div></td></tr></table></figure>
+
+<p>只要在文件头里加入password: 字段即可对文章加密。</p>
+<p>也可以对一个标签加密，在_config.yml里加入如下代码</p>
+<figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-comment"># Security</span><br><span class="hljs-attr">encrypt:</span> <span class="hljs-comment"># hexo-blog-encrypt</span><br>  <span class="hljs-attr">abstract:</span> <span class="hljs-string">有东西被加密了,</span> <span class="hljs-string">请输入密码查看.</span><br>  <span class="hljs-attr">message:</span> <span class="hljs-string">您好,</span> <span class="hljs-string">这里需要密码.</span><br>  <span class="hljs-attr">tags:</span><br>  <span class="hljs-bullet">-</span> &#123;<span class="hljs-attr">name:</span> <span class="hljs-string">tag1</span>, <span class="hljs-attr">password:</span> <span class="hljs-string">密码A</span>&#125;<br>  <span class="hljs-bullet">-</span> &#123;<span class="hljs-attr">name:</span> <span class="hljs-string">tag2</span>, <span class="hljs-attr">password:</span> <span class="hljs-string">密码B</span>&#125;<br>  <span class="hljs-attr">template:</span> <span class="hljs-string">&lt;div</span> <span class="hljs-string">id=&quot;hexo-blog-encrypt&quot;</span> <span class="hljs-string">data-wpm=&quot;&#123;&#123;hbeWrongPassMessage&#125;&#125;&quot;</span> <span class="hljs-string">data-whm=&quot;&#123;&#123;hbeWrongHashMessage&#125;&#125;&quot;&gt;&lt;div</span> <span class="hljs-string">class=&quot;hbe-input-container&quot;&gt;&lt;input</span> <span class="hljs-string">type=&quot;password&quot;</span> <span class="hljs-string">id=&quot;hbePass&quot;</span> <span class="hljs-string">placeholder=&quot;&#123;&#123;hbeMessage&#125;&#125;&quot;</span> <span class="hljs-string">/&gt;&lt;label&gt;&#123;&#123;hbeMessage&#125;&#125;&lt;/label&gt;&lt;div</span> <span class="hljs-string">class=&quot;bottom-line&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;script</span> <span class="hljs-string">id=&quot;hbeData&quot;</span> <span class="hljs-string">type=&quot;hbeData&quot;</span> <span class="hljs-string">data-hmacdigest=&quot;&#123;&#123;hbeHmacDigest&#125;&#125;&quot;&gt;&#123;&#123;hbeEncryptedData&#125;&#125;&lt;/script&gt;&lt;/div&gt;</span><br>  <span class="hljs-attr">wrong_pass_message:</span> <span class="hljs-string">抱歉,</span> <span class="hljs-string">这个密码看着不太对,</span> <span class="hljs-string">请再试试.</span><br>  <span class="hljs-attr">wrong_hash_message:</span> <span class="hljs-string">抱歉,</span> <span class="hljs-string">这个文章不能被校验,</span> <span class="hljs-string">不过您还是能看看解密后的内容.</span><br></code></pre></div></td></tr></table></figure>
+
+<p>只要文章标记为tag1，tag2即可加密。</p>
+<h4 id="文章置顶"><a href="#文章置顶" class="headerlink" title="文章置顶"></a>文章置顶</h4><p>hexo默认是按时间排序的，如果要置顶一些文章需要配置一下</p>
+<p>目前已经有修改后支持置顶的<a target="_blank" rel="noopener" href="https://github.com/netcan/hexo-generator-index-pin-top">仓库</a>，可以直接用以下命令安装。</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> npm uninstall hexo-generator-index --save</span><br><span class="hljs-meta">$</span><span class="bash"> npm install hexo-generator-index-pin-top --save12</span><br></code></pre></div></td></tr></table></figure>
+
+<p>然后在需要置顶的文章的<code>Front-matter</code>中加上<code>top: true</code>即可。比如下面这篇文章：</p>
+<figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">hexo+GitHub博客搭建实战</span><br><span class="hljs-attr">date:</span> <span class="hljs-number">2017-09-08 12:00:25</span><br><span class="hljs-attr">categories:</span> <span class="hljs-string">博客搭建系列</span><br><span class="hljs-attr">top:</span> <span class="hljs-literal">true</span><br><span class="hljs-string">---123456</span><br></code></pre></div></td></tr></table></figure>
+
+<p>到目前为止，置顶功能已经可以实现了。所有相关博文到这边就结束了。</p>
+<p>不过置顶的文章显示在最上面之后，如果没有明确的置顶标志，是不是感觉有点怪怪的呢？</p>
+<h5 id="设置置顶标志"><a href="#设置置顶标志" class="headerlink" title="设置置顶标志"></a>设置置顶标志</h5><p>打开：<code>/blog/themes/next/layout/_macro</code> 目录下的<code>post.swig</code>文件，定位到<code>&lt;div class=&quot;post-meta&quot;&gt;</code>标签下，插入如下代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">&#123;% if post.top %&#125;<br>  <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa fa-thumb-tack&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">font</span> <span class="hljs-attr">color</span>=<span class="hljs-string">7D26CD</span>&gt;</span>置顶<span class="hljs-tag">&lt;/<span class="hljs-name">font</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;post-meta-divider&quot;</span>&gt;</span>|<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>&#123;% endif %&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h5 id="实际使用"><a href="#实际使用" class="headerlink" title="实际使用"></a>实际使用</h5><p><u>实际使用中，置顶标志的样式有点问题，应该显示 <strong>置顶</strong>，实际显示：%if post.top %<strong>置顶</strong> %endif% ，我并不太懂代码的写法，只能暂时删去。</u></p>
+<p>翻看了一下fluid主题文档，主题本身有置顶图标。删除hexo-generator-index-pin-top，重新安装 hexo-generator-index</p>
+<p><em>在文章开头 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter (opens new window)</a>中配置 <code>sticky</code> 属性：</em></p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">文章标题</span><br><span class="hljs-attr">index_img:</span> <span class="hljs-string">/img/example.jpg</span><br><span class="hljs-attr">date:</span> <span class="hljs-number">2019-10-10 10:00:00</span><br><span class="hljs-attr">sticky:</span> <span class="hljs-number">100</span><br><span class="hljs-meta">---</span><br><span class="hljs-string">以下是文章内容</span><br></code></pre></div></td></tr></table></figure>
+
+<p><em><code>sticky</code> 数值越大，该文章越靠前，达到类似于置顶的效果，其他未设置的文章依然按默认排序。</em></p>
+<p><em>当文章设置了 <code>sticky</code> 后，主题会默认在首页文章标题前增加一个图标，来标识这是一个置顶文章，你可以通过<strong>主题配置</strong>去关闭或修改这个功能：</em></p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">index:</span><br>  <span class="hljs-attr">post_sticky:</span><br>    <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>    <span class="hljs-attr">icon:</span> <span class="hljs-string">&#x27;iconfont icon-top&#x27;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><em><code>icon</code> 可以通过<a target="_blank" rel="noopener" href="https://fluid-dev.github.io/hexo-fluid-docs/icon/">自定义图标</a>修改为其他图标。</em></p>
+<h3 id="排坑"><a href="#排坑" class="headerlink" title="排坑"></a>排坑</h3><ol>
+<li><h4 id="hexo-clean报错"><a href="#hexo-clean报错" class="headerlink" title="hexo clean报错"></a>hexo clean报错</h4><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">ERROR</span> &#123;<br>  <span class="hljs-attr">err:</span> [<span class="hljs-attr">Error: EISDIR:</span> <span class="hljs-string">illegal</span> <span class="hljs-string">operation</span> <span class="hljs-string">on</span> <span class="hljs-string">a</span> <span class="hljs-string">directory</span>, <span class="hljs-string">read</span>] &#123;<br>    <span class="hljs-attr">errno:</span> <span class="hljs-number">-21</span>,<br>    <span class="hljs-attr">code:</span> <span class="hljs-string">&#x27;EISDIR&#x27;</span>,<br>    <span class="hljs-attr">syscall:</span> <span class="hljs-string">&#x27;read&#x27;</span><br>  &#125;<br>&#125; <span class="hljs-attr">Plugin load failed:</span> <span class="hljs-string">%s</span> <span class="hljs-string">hexo-theme-landscape</span><br></code></pre></div></td></tr></table></figure>
+
+<p>​    错误出现在重建hexo目录后，修改默认主题<br>​    估计是依赖冲突，多番查找之后找到了方案，把出问题的插件删除就可以了，反正默认主题我也不用，也就没有再装了。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">npm <span class="hljs-builtin-name">remove</span> hexo-theme-landscape<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><h4 id="网站名乱码"><a href="#网站名乱码" class="headerlink" title="网站名乱码"></a>网站名乱码</h4><p>这是由于_config.yml编码不对，用notepad++ 修改成UTF-8编码，重新生成即可</p>
+</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%AB%99/">网站</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BE%A4%E6%99%96/">群晖</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+					<i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BE%A4%E6%99%96/">群晖</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BB%BA%E7%AB%99/">建站</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/11/t1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">T1降级及线刷</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "VMVKyoD0WFaVuellflgnwXaU-gzGzoHsz",
+          app_key: "DzHP5k3pBnq1FP1RyJbzjyAH",
+          placeholder: "来，说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+
+
+</body>
+</html>

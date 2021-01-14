@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一个私人博客">
+  <meta name="author" content="净量">
+  <meta name="keywords" content="">
+  <title>路由器的ipv6放行 - 珞珞博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/foundation.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.pluoluo.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Pluoluo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="路由器的ipv6放行">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-15 14:31" pubdate>
+        2020年12月15日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      9 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      1
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">路由器的ipv6放行</h1>
+            
+            <div class="markdown-body">
+              <div id="hexo-blog-encrypt" data-wpm="密码错误, 请再试试" data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容"><div class="hbe-input-container"><input type="password" id="hbePass" placeholder="您好, 这里需要密码" /><label>您好, 这里需要密码</label><div class="bottom-line"></div></div><script id="hbeData" type="hbeData" data-hmacdigest="273a9e43afa4f645efbb37dcebe673864e198b7679d2362da0ac8136e16bece7">fe6387f4031561f5d0681acda8830f3c120180045b3ccfb35d9c296a4d51d0ee6ac06a28e06d43f8f8a31b035afc228e46daf821aeb059f68b034dec2ab3b0e7090010acf10f6966d3b7fb15004665f1bf8b08dc1762ee2ab0d7a0bf5ac5d1737a9d06a77ac9d0445bb2505b7e785155ff125c74f13f10302d11410518a85efa79400c2f8fbecf4f36fdf452570816be269a7b7b473dc27806e7ee16127c652dad69cb5d9fdcb677caa7d11688c7983f5beaa85048873f41cfd6d0b2a158ec50d2e17c171136f2179eacb295c636432561f97ae97cefb82a98a54fe644f707bfa12ed832f289a6fb7dbd973026a7cca02c771cf495cfd322e0df6c7839cf6624012ee1ab59e5caea7e3d90221768220578326b54101a81325df1c564bb864c6c8d26631a75ae27e82e23798a9f6721952a460e47c872c096cec056b3186bd61bec2a9898a4be07242d2018610e403d784bd5fee8b1bc5cd85387a996f8211d0effd7fcd9dcebd05dd8cb8c2102d8673fea89de6f6ac62ff73c71ded57039bcf468e2e40640a3fc5d5f70f32f192e5fac8bcd0f9fc10fff47e95b4c6a4be7dafcb905ac88cda32e09434ac7d08bc854a06f3e1096fafac87e9568c402af36e459517efa4fbc8e658e697435ae6e490f6014b14191122cb590acec40606dc812b3f59454072f2961f8493e795d1502f2177d09ee20c485217c338b002a2e45c34f43785804065ee9362a38c1d548b48cbfc2229545ab0277630a9d4f696b50d0884e26927f7b0ccdcee71a4b67436c7885a3c2a4ae13d3cca9e54f6f1b0112a8f786a2c844a978fa283d2b66af58126110980d17f2f81a066104c526763e81afc1b1b1ba6e6df0514464f0f85918356bde3aa787693984c374212a79a72f2e8f38c420785e039cd4779609df8be012b076885ab26e0253f16e9e79bdb1205dec081aa9bc9e405e86ba56f1d7e65b3b73a149a00bf14fa70dc1af57585ebda6b79f48f6202ea6de8a7d9cc89bc2fd3185e1b9a6cb59c7f7cbf04cfcb21bf1b4a1c8db1a86fb1736edd0bbf52f14cd9cc612ab440090f2bb42160987531bbda01af59e7897ea856af5794bdc13bc2724e520965065c37c68a6bf90b19e89e80d9e4dda5215a48a1ae346d83d9028ed3997cb9d75361a3a3f94999f2189e3b14d346f555152fe776a5374433408cb5aa1e1506c67249421c929b51b7620d1a56e564b2f43b0671b4af00b59ae49b90df0bf4299de030462149da6a7d8e379b0d6966caf0bf5848323c2d2b894d62d1f11d22f5d94377ff9e30b5b3aa042d728bc24df8818ab0a2d72d21c12813ed3dea51036513c2e627d85eefcf33275c808e1ff5435cf5e4a2d6bdca1c6bc8a003b716bdf55cfc318f1cf8f6e66c86deb85e20aab27a08e418b0b3e329bd8973c35c81219221903edf56808f933b8a55789d7f3e584807f72c8b03fe4fa6d7e52b9e13acfc3747761ce37457b0a92cfce56bce29ade012e584a41cd4b4ca2f3d7ea0ca2c0857a837725b4db56c93adc2060bf881ace7d7e5976b7bbf13ea1dc1c171378977d718c3be47d736b5867de559c2b362deb718a1874e48f9d7c8257887e4b550a85d3c5d957660e559c6abf433387247d949cceda13fe9e85b29b8e5dd93cd2f2b3789e191af7201b7140e52feb71bafa320d1160915b883a9ad6e1db89d6e6098d908e3eca60303934a17976c1e2e57f38b58a4f73dbf13ab2e14f8bf041647e412cd4fc448086c70985c773d05f5a0126724404bfd698cff7315a5afba54c0b086e5a8f29bfc41a5c331149127c2e1322ddaacb8ee44873fd3f68b5de0f6de669b9e870f5e065a8cdca24ee8ca569159fc7345775f11dc37fa43311788b1f37bfe456431327c83d0363ade32658e61fb4e197f4fb2555d7a221d0d51e7bfdbf71591107ab1c5e8a15e150e4efa25acce9b9914ec0b4f98329d6adbdcb2f0189ebad0e46952fcfa5602c3284fde712078aca2fea540d2267da59bb0358ee72efd232c0a72760159fdf3e263fbe001f76707302f88845681218b429a6d1e186875c263001aa75b224fcb7e84e54f262a81a8988a1f8312c2dc3a8d21d430d02905eef905c8b31db517784a332a476605673ed901a1173f053c6f51fd749857956889edd4f7151673ad4df370b7a08510a634aa2373068c5248235f0682132ce50b3a2d486dd9f1d9a30dad77d799019e96a4a394978892752c47446f00df4d4c7f12eec0ad83c8a08a2b862dfd34a1d298575224d8bad71f23475db2bc23dbf4423fe4355705a05aad430b647447030071df77db5deb8f001af0b4bb1e92aef65bb73d9a4f6080f6320ea8f4352b213a585a12fd4eb87f3f3354203e07ce5f1c261aca4acca2b3e259f9477af9fe41ca512765ef14695634c61fbccf68153f9a004c41a8dbcbc99766929be024b0752fdcf1f577238f43c0dbcff05b39c11ecefe22af0193dd8519012383438d14d9a2ed4d260dbd46218ddc1421f988e3c56fc5092dc2e30d8c6e9b88c20742365f79ff1e8bac3c6f2425b368de2eb98c18be0e35fe597bbafca51c661ba88129cf35bec04a01be719229b40bb1df80ca5c432e4fa9957f6ef7a2acfc8c30b900cef4fb43676ef361c2d5d00669cfdd6367810f927e4897619599eb1505a40c793b3e63cdbaa8586d069cc60185c655227056523f029898cc75cb9ef4b86ebeab66bdde983ffc95ea6eac41bf5c433fd68d171122da91cda07eb90891cf4b6686c9e934105cf7141938d2ca5f49bc8130d53f5f1c5c31d0ffc0e8a55dd5e3240be308e79f2d78557d50c01798a7a5e27a7b74e7e65454d6abae289c36ce02a33d4457035b9d10fb468892cfbb1f6f9cf07b97974d553a2eed2140f1e03910f1343dab31ea4bed7ff74f7766c71cc848e456dc6fd8840dbf2d6882ffa2eac3bd22687226dcd38dd6ed6d934b7087006e4ed315f0d78d0eaa2a0236f80bd382cc6631ef80b69cfbff49c936648207dd4c49da1c66ec628bd5cd5d89325ed1540d512d957b1ac9e7e71ea04719ee59f27e8c34377bb774e229c5a98b67f32a5cd5921103cf772e738612e31a3af4db70355fbfb1eb2ef0a0bcca36c5b6daa3b26d4d8b5f991aab8fbaa44cc13d4e03ef248dd296d71be85fc8395875aca4335c2e45804819ea23c48b538ae9e74af5321de582e96607f806fc955660aaa0bbf0e8bd499818d30e98e9884cd055c42ac764cee3b256e2312afd2a4847debba926a61dfdc251a22df0c4a9b7298e95e44033d1fa2b72b49630eb028201e08b749db7b7d1c8c6d556aed6a5e2f137af54c7bace2d8315ad393a9615ca227e7d10ee78a8fd86436ef5f77d911ae5182004c00507c65d1059b527c828c0f5f9808dbf0d660c47f3172583d75fbc6f324495ac39a85773a9bef44d9888e439426d209a5192817b8f8ab081a35dad1a82aa85abf22529d0b14e66e986a763771593892b374d68b403977f6bc4c208733a775a49839f67371ab168da67591890c9b9ebee5bd14e834014d88c3209764a61bbf26f739cc49ed695474b43d0ba3630d47f468945ac58a0d53a4676fdb9fdb5d00ac282848495b373482db4580b65976a5eb0c28829ba69fca912b83abf2be4946029a70fa2715a1de5605fdaf967145a02147ebe2e3728eb5864b204df40477a4d363cc3fd1d383351af748c6bfb4efec7fb1f03e496659e73138f12c580d30d669ca698dd727a4eec9a7f3f3d9e0201502c98818296a5525f4ca3797c3a0841779cf642cf67d3417d91c43ee6b1a49c08c214e5edcca6d7e951a0446ca312f59c77e21ffe7c8e76a5aed645a7641a92fa26c7e95002fbc1664bfe94f90092770f0df6a960761c6e6ac0c1439229595c0a7ee5b6d93af9faf9c388d457a222130291314a4f27f075c80afea80fac4f04dcc382e08697fb1fabe7afe819cfbedd11c0fe7d68614184e421008ffc210c8182d9310d2a2dc46d411369f5728f3b38d13fae6ed813bdaf81bf308caf332902edde5062e989f08e5e4de60dd4c1a6bcc23fc71cefdf48ec3e4fae7cc63222e4198df7baa2f748fe6bf1730556e138bde7a56066ac45b4e273b72b2b02ae1133ada22805779649acaecffa03402f20122e4a16a64fb53d323e96ec12547a7d5dbeca3979b2762</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BD%AF%E8%B7%AF%E7%94%B1/ipv6/">ipv6</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+					<i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%B0%E5%BD%95/">记录</a>
+                    
+                      <a class="hover-with-bg" href="/tags/ipv6/">ipv6</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/16/sed&amp;grep%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%A4%84%E7%90%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">从写DDNS脚本出发学习sed&grep字符串的处理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/14/ipv6ddns/">
+                        <span class="hidden-mobile">IPv6的DDNS自动更新实现</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+
+
+</body>
+</html>
