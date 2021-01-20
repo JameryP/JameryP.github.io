@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一个私人博客">
+  <meta name="author" content="净量">
+  <meta name="keywords" content="">
+  <title>windows环境下Typora自定义又拍云上传脚本 - 珞珞博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/foundation.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.pluoluo.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 40vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Pluoluo</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="windows环境下Typora自定义又拍云上传脚本">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-20 14:23" pubdate>
+        2021年1月20日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">windows环境下Typora自定义又拍云上传脚本</h1>
+            
+            <div class="markdown-body">
+              <p>最近把Githup page打开了，但是访问很慢，即使套上cloudfare也不理想，主要是图片问题，于是打算用图床，又拍云又可以拿出来用了。现在的流程是，windows下typora写文章，如果要插入本地图片，直接自动上传到又拍云，文章使用网络图库。但我又不想安装其它软件，以下是通过bash脚本使用api实现的过程和学习纪录。</p>
+<a id="more"></a>
+
+<p>第一个问题，用什么语言。我什么语言也不会，只能算接触过shell和python，之前用dnspod的API弄过 <a href="/2020/12/14/ipv6ddns/" title="IPV6的DDNS">IPV6的DDNS</a>，也算有点shell的经验，这次也就用它了。</p>
+<p>第二个问题，windows有shell吗，有，win10有WSL子系统，可以直接用bash运行脚本。只是路径格式是个问题。</p>
+<h3 id="Typora自定义命令行上传规则"><a href="#Typora自定义命令行上传规则" class="headerlink" title="Typora自定义命令行上传规则"></a>Typora自定义命令行上传规则</h3><p>需要先明白这个怎么运作的，typora命令行上传是比较简单的，将文件的全路径作为参数传递命令行，返回网址时只需要命令行返回一个Upload Success 和网址</p>
+<div class="hljs code-wrapper"><pre class="mermaid">graph LR
+id1(插入图片)-->id2(文件路径传递给命令行)-->id3(api上传)-->id4(返回网址)-->id5(插入网络图片到文章)</pre></div>
+
+<h3 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h3><h4 id="API格式"><a href="#API格式" class="headerlink" title="API格式"></a>API格式</h4><p>网上少有shell命令的api脚本，搜来搜去只有一个脚本，但试了试失效了，看了官方文档，格式都变了，按文档自己写的话， 中间有一个验证制作过程有点复杂，要把文件长度，密码，时间放一起算一个md5，对我来说有点难，光符号要求的时间格式，我最翻了很久的资料。最后无意中找到了一个官方的工具，得到一个简单的方式，也就没再研究了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">BUCKET=<span class="hljs-string">&quot; &quot;</span> <span class="hljs-comment"># 云存储服务的名称</span><br>r_path=<span class="hljs-string">&quot;/path/&quot;</span> <span class="hljs-comment"># 上传默认的路径</span><br>USERNAME=<span class="hljs-string">&quot; &quot;</span>  <span class="hljs-comment">#操作员名</span><br>PASSWORD=<span class="hljs-string">&quot; &quot;</span> <span class="hljs-comment"># 操作员密码</span><br>dt=`date -u +%a,<span class="hljs-string">&quot; &quot;</span>%d<span class="hljs-string">&quot; &quot;</span>%b<span class="hljs-string">&quot; &quot;</span>%Y<span class="hljs-string">&quot; &quot;</span>%T<span class="hljs-string">&quot; &quot;</span>GMT` <span class="hljs-comment">#时间戳</span><br>secret=`<span class="hljs-built_in">echo</span> -n <span class="hljs-variable">$&#123;PASSWORD&#125;</span> | md5sum | awk <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span>`  <span class="hljs-comment">#密码加密</span><br>domain=<span class="hljs-string">&quot; &quot;</span> <span class="hljs-comment"># 对象存储绑定的域名</span><br><span class="hljs-comment">#上传，-w %&#123;http_code&#125;是获取状态码</span><br>curl -X PUT http://v0.api.upyun.com/<span class="hljs-variable">$&#123;BUCKET&#125;</span><span class="hljs-variable">$&#123;r_path&#125;</span> -H <span class="hljs-string">&quot;Authorization: Basic <span class="hljs-variable">$&#123;auth_h&#125;</span>&quot;</span> -T <span class="hljs-string">&quot;&#123;<span class="hljs-variable">$r_fullname</span>&#125;&quot;</span>  -w %&#123;http_code&#125; -s<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="路径处理"><a href="#路径处理" class="headerlink" title="路径处理"></a>路径处理</h4><p>第一个要处理的是文件路径，windows的文件路径与wsl的不同，需要转换，这部分就是字符串的处理。</p>
+<p>windows的路径是这样的</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs taggerscript">D:<span class="hljs-symbol">\t</span>emp<span class="hljs-symbol">\5</span>18c<span class="hljs-symbol">\i</span>mages<span class="hljs-symbol">\r</span>ace<span class="hljs-symbol">\p</span>r1.jpg<br></code></pre></div></td></tr></table></figure>
+
+<p>需要转换成linux格式的，这样</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">mnt<span class="hljs-regexp">/d/</span>temp<span class="hljs-regexp">/518c/im</span>ages<span class="hljs-regexp">/race/</span>pr1.jpg<br></code></pre></div></td></tr></table></figure>
+
+<p>区别就是盘符和分隔符，先把路径分三段，盘符、中间路径、文件名，这个过程中又学到了一种截取字符串的方式。</p>
+<h4 id="改文件名"><a href="#改文件名" class="headerlink" title="改文件名"></a>改文件名</h4><p>为了防止文件名重复，上传的文件都将在原文件名前加上日期。又拍云API有改名的，不过按照文档中的格式写，怎么也过不了，提示缺‘BUCKET NAME’，于是只能在本地操作改名，上传之后再改回来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">dr=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;i:0:1&#125;</span>&quot;</span>                                   <span class="hljs-comment">#从0（第一个字符）开始，截取1个字符，即盘符</span><br>dr=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;dr,,&#125;</span>&quot;</span>                                    <span class="hljs-comment">#盘符要转成小写，待用</span><br>path_b=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;i#*\\&#125;</span>&quot;</span>                               <span class="hljs-comment">#以左数第一个\为分隔，保留右边的，就是删去了盘符</span><br>dl=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;path_b//\\/\/&#125;</span>&quot;</span>                           <span class="hljs-comment">#用/替换所有的\，待用</span><br>l_path=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;dl%\/*&#125;</span>&quot;</span>                              <span class="hljs-comment">#以右数第一个/为分隔，保留左边的，即中间路径</span><br>o_name=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;dl##*\/&#125;</span>&quot;</span>                             <span class="hljs-comment">#以左数最后一个/为分隔，保留右边的，即原文件名</span><br>o_fullname=<span class="hljs-string">&quot;/mnt/&quot;</span><span class="hljs-variable">$dr</span><span class="hljs-string">&quot;/&quot;</span><span class="hljs-variable">$dl</span>                     <span class="hljs-comment">#拼接成完整linux格式的原文件路径</span><br>r_name=<span class="hljs-variable">$dt2</span><span class="hljs-string">&#x27;_&#x27;</span><span class="hljs-variable">$o_name</span>                           <span class="hljs-comment">#拼接成新的文件名</span><br>r_fullname=<span class="hljs-string">&quot;/mnt/&quot;</span><span class="hljs-variable">$dr</span><span class="hljs-string">&quot;/&quot;</span><span class="hljs-variable">$l_path</span><span class="hljs-string">&quot;/&quot;</span><span class="hljs-variable">$r_name</span>       <span class="hljs-comment">#拼接成完整linux格式的新文件路径</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="脚本全文"><a href="#脚本全文" class="headerlink" title="脚本全文"></a>脚本全文</h4><p>有点乱，用起来没问题。</p>
+<p>有一个问题，映射磁盘的文件wsl找不到，我也不知道怎么找，如果需要插入映射磁盘文件，建议让typora自动复制到本地磁盘，然后右键上传。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment"># 各类配置信息</span><br>BUCKET=<span class="hljs-string">&quot; &quot;</span> <span class="hljs-comment"># 云存储服务的名称</span><br>r_path=<span class="hljs-string">&quot;/path/&quot;</span> <span class="hljs-comment"># 上传默认的路径</span><br>USERNAME=<span class="hljs-string">&quot; &quot;</span>  <span class="hljs-comment">#操作员名</span><br>PASSWORD=<span class="hljs-string">&quot; &quot;</span> <span class="hljs-comment"># 操作员密码</span><br>dt=`date -u +%a,<span class="hljs-string">&quot; &quot;</span>%d<span class="hljs-string">&quot; &quot;</span>%b<span class="hljs-string">&quot; &quot;</span>%Y<span class="hljs-string">&quot; &quot;</span>%T<span class="hljs-string">&quot; &quot;</span>GMT`    <span class="hljs-comment">#时间戳</span><br>secret=`<span class="hljs-built_in">echo</span> -n <span class="hljs-variable">$&#123;PASSWORD&#125;</span> | md5sum | awk <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span>`  <span class="hljs-comment">#密码加密</span><br>domain=<span class="hljs-string">&quot; &quot;</span>           <span class="hljs-comment"># 对象存储绑定的域名</span><br>dt2=`date +%y%m%d`   <span class="hljs-comment">#6位日期格式</span><br>out=<span class="hljs-string">&quot;&quot;</span><br><span class="hljs-built_in">test</span>=<span class="hljs-string">&quot;200&quot;</span><br>signature=`<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;USERNAME&#125;</span>:<span class="hljs-variable">$&#123;PASSWORD&#125;</span>&quot;</span> | base64` <br><br>auth_h=`<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;USERNAME&#125;</span>:<span class="hljs-variable">$&#123;PASSWORD&#125;</span>&quot;</span> | base64`<br><span class="hljs-function"><span class="hljs-title">update_file</span></span>() &#123;<br>  update=$(curl -X PUT http://v0.api.upyun.com/<span class="hljs-variable">$&#123;BUCKET&#125;</span><span class="hljs-variable">$&#123;r_path&#125;</span> -H <span class="hljs-string">&quot;Authorization: Basic <span class="hljs-variable">$&#123;auth_h&#125;</span>&quot;</span> -T <span class="hljs-string">&quot;&#123;<span class="hljs-variable">$r_fullname</span>&#125;&quot;</span>  -w %&#123;http_code&#125; -s)<br>   &#125;<br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>; <span class="hljs-keyword">do</span><br><span class="hljs-comment">#处理windows格式的文件路径</span><br>	dr=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;i:0:1&#125;</span>&quot;</span>                                   <span class="hljs-comment">#从0（第一个字符）开始，截取1个字符，即盘符</span><br>	dr=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;dr,,&#125;</span>&quot;</span>                                    <span class="hljs-comment">#盘符要转成小写，待用</span><br>	path_b=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;i#*\\&#125;</span>&quot;</span>                               <span class="hljs-comment">#以左数第一个\为分隔，保留右边的，就是删去了盘符</span><br>	dl=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;path_b//\\/\/&#125;</span>&quot;</span>                           <span class="hljs-comment">#用/替换所有的\，待用</span><br>	l_path=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;dl%\/*&#125;</span>&quot;</span>                              <span class="hljs-comment">#以右数第一个/为分隔，保留左边的，即中间路径</span><br>	o_name=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;dl##*\/&#125;</span>&quot;</span>                             <span class="hljs-comment">#以左数最后一个/为分隔，保留右边的，即原文件名</span><br>	o_fullname=<span class="hljs-string">&quot;/mnt/&quot;</span><span class="hljs-variable">$dr</span><span class="hljs-string">&quot;/&quot;</span><span class="hljs-variable">$dl</span>                     <span class="hljs-comment">#拼接成完整linux格式的原文件路径</span><br>	r_name=<span class="hljs-variable">$dt2</span><span class="hljs-string">&#x27;_&#x27;</span><span class="hljs-variable">$o_name</span>                           <span class="hljs-comment">#拼接成新的文件名</span><br>	r_fullname=<span class="hljs-string">&quot;/mnt/&quot;</span><span class="hljs-variable">$dr</span><span class="hljs-string">&quot;/&quot;</span><span class="hljs-variable">$l_path</span><span class="hljs-string">&quot;/&quot;</span><span class="hljs-variable">$r_name</span>       <span class="hljs-comment">#拼接成完整linux格式的新文件路径</span><br>	mv <span class="hljs-variable">$o_fullname</span> <span class="hljs-variable">$r_fullname</span>                      <span class="hljs-comment">#Change Original filename to remote filename </span><br>	<span class="hljs-comment">#上传</span><br>	update_file  <br>	<br>	<span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$update</span> == *<span class="hljs-variable">$test</span>* ]]; <span class="hljs-keyword">then</span><br>		out=<span class="hljs-string">&quot;<span class="hljs-variable">$out</span>\n$domain$r_path<span class="hljs-variable">$r_name</span>&quot;</span><br>		<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$o_name</span> upload success&quot;</span><br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;API UPDATE FAILED. DUMPING RESULTS:\n<span class="hljs-variable">$update</span>&quot;</span><br>		<span class="hljs-built_in">exit</span> 0<br>	<span class="hljs-keyword">fi</span><br>	mv <span class="hljs-variable">$r_fullname</span> <span class="hljs-variable">$o_fullname</span>                     <span class="hljs-comment">#Change remote filename back to original filename </span><br><span class="hljs-keyword">done</span><br><br><span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;Upload Success:\n<span class="hljs-variable">$out</span>&quot;</span><br><br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>格式——图像——全局图像设置</p>
+<p><img src="https://img.pluoluo.top/hexo/210120_typoraimg.jpg" srcset="/img/loading.gif"></p>
+<p>如果没有使用网络驱动器或其它的映射磁盘，可以在插入图片时里，选自动上传。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/linux/">linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+					<i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/shell%E8%84%9A%E6%9C%AC/">shell脚本</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%AB%99/">网站</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8F%88%E6%8B%8D%E4%BA%91/">又拍云</a>
+                    
+                      <a class="hover-with-bg" href="/tags/api/">api</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/07/nps/">
+                        <span class="hidden-mobile">NPS内网穿透实际操作</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "VMVKyoD0WFaVuellflgnwXaU-gzGzoHsz",
+          app_key: "DzHP5k3pBnq1FP1RyJbzjyAH",
+          placeholder: "来，说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+
+
+</body>
+</html>
