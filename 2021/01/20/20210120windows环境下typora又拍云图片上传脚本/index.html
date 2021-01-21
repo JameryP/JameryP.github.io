@@ -234,8 +234,8 @@
               <p>最近把Githup page打开了，但是访问很慢，即使套上cloudfare也不理想，主要是图片问题，于是打算用图床，又拍云又可以拿出来用了。现在的流程是，windows下typora写文章，如果要插入本地图片，直接自动上传到又拍云，文章使用网络图库。但我又不想安装其它软件，以下是通过bash脚本使用api实现的过程和学习纪录。</p>
 <a id="more"></a>
 
-<p>第一个问题，用什么语言。我什么语言也不会，只能算接触过shell和python，之前用dnspod的API弄过 <a href="/2020/12/14/ipv6ddns/" title="IPV6的DDNS">IPV6的DDNS</a>，也算有点shell的经验，这次也就用它了。</p>
-<p>第二个问题，windows有shell吗，有，win10有WSL子系统，可以直接用bash运行脚本。只是路径格式是个问题。</p>
+<p>第一个问题，用什么语言。我什么语言也不会，只能算接触过bash和python，之前用dnspod的API弄过 <a href="/2020/12/14/ipv6ddns/" title="IPV6的DDNS">IPV6的DDNS</a>，也算有点linux shell的经验，这次也就用它了。</p>
+<p>第二个问题，windows有bash吗，有，win10有WSL子系统，可以直接用bash运行脚本。只是路径格式是个问题。</p>
 <h3 id="Typora自定义命令行上传规则"><a href="#Typora自定义命令行上传规则" class="headerlink" title="Typora自定义命令行上传规则"></a>Typora自定义命令行上传规则</h3><p>需要先明白这个怎么运作的，typora命令行上传是比较简单的，将文件的全路径作为参数传递命令行，返回网址时只需要命令行返回一个Upload Success 和网址</p>
 <p><img src="https://img.pluoluo.top/hexo/210120_mermaid2.jpg" srcset="/img/loading.gif" alt="mermaid2"></p>
 <h3 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h3><h4 id="API格式"><a href="#API格式" class="headerlink" title="API格式"></a>API格式</h4><p>网上少有shell命令的api脚本，搜来搜去只有一个脚本，但试了试失效了，看了官方文档，格式都变了，按文档自己写的话， 中间有一个验证制作过程有点复杂，要把文件长度，密码，时间放一起算一个md5，对我来说有点难，光符号要求的时间格式，我最翻了很久的资料。最后无意中找到了一个官方的工具，得到一个简单的方式，也就没再研究了。</p>
@@ -247,7 +247,7 @@
 <p>windows的路径是这样的</p>
 <figure class="highlight taggerscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs taggerscript">D:<span class="hljs-symbol">\t</span>emp<span class="hljs-symbol">\5</span>18c<span class="hljs-symbol">\i</span>mages<span class="hljs-symbol">\r</span>ace<span class="hljs-symbol">\p</span>r1.jpg<br></code></pre></div></td></tr></table></figure>
 
-<p>需要转换成linux格式的，这样</p>
+<p>需要转换成WSL linux格式的，这样</p>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">mnt<span class="hljs-regexp">/d/</span>temp<span class="hljs-regexp">/518c/im</span>ages<span class="hljs-regexp">/race/</span>pr1.jpg<br></code></pre></div></td></tr></table></figure>
 
 <p>区别就是盘符和分隔符，先把路径分三段，盘符、中间路径、文件名，这个过程中又学到了一种截取字符串的方式。</p>
@@ -302,6 +302,12 @@
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/01/21/openwrt%E6%8C%82%E8%BD%BD%E7%BE%A4%E6%99%96samba/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">openwrt挂载群晖samba</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
