@@ -39,7 +39,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"blog.pluoluo.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"always","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"blog.pluoluo.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -226,6 +226,78 @@
               <a href="/tags/%E5%BB%BA%E7%AB%99/">建站</a>
             
               <a href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/05/openvpn/">OpenVPN配置</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/05/openvpn/">
+          
+          
+            
+          
+          就是爱折腾，明明没有更多需求了，还是研究了一下VPN的使用。
+
+
+使用环境
+两边都有ipv6网络环境
+家里openwrt软路由作为旁路由，VPN就架设在这个设备上
+终端使用win10安装openvpn gui
+
+服务器端主要配置点：
+
+协议，需要选TCP Server IPv6
+
+端口可改可不改
+
+ddns填入配置好的域名
+
+客户端网段不能与现有重复
+
+推送是这样，如果想将所有流量都通过vpn服务
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-05 17:50" pubdate>
+              2021-02-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/linux/">linux</a>
+            
+              <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</a>
+            
+              <a href="/tags/nps/">nps</a>
+            
+              <a href="/tags/vpn/">vpn</a>
             
           </div>
         
@@ -680,67 +752,11 @@ airtest操作
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/12/24/python-001/">python虚拟环境virtualenv的用法</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/12/24/python-001/">
-          
-          
-            
-          
-          因为想写一个简单的爬虫，用了到airtest，结果这货不支持电脑现在装的python3.8，又不想删了重装，于是又找到了虚拟环境的virtualenv，以下是配置过程。
-
-首先的安装python3.6，这步就略过，不需要加入到系统环境路径。
-
-安装virtualenv
-1pip install virtualenv
-
-这一步也出错了，提示
-1Could not fetch URL https://
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-24 11:22" pubdate>
-              2020-12-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/python/">python</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/python/">python</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   

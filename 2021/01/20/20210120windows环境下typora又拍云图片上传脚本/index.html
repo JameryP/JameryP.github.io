@@ -55,7 +55,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"blog.pluoluo.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"always","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"blog.pluoluo.top","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      1.6k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19
+      20
        分钟
     </span>
   
@@ -239,10 +239,9 @@
 <h3 id="Typora自定义命令行上传规则"><a href="#Typora自定义命令行上传规则" class="headerlink" title="Typora自定义命令行上传规则"></a>Typora自定义命令行上传规则</h3><p>需要先明白这个怎么运作的，typora命令行上传是比较简单的，将文件的全路径作为参数传递命令行，返回网址时只需要命令行返回一个Upload Success 和网址</p>
 <p><img src="https://img.pluoluo.top/hexo/210120_mermaid2.jpg" srcset="/img/loading.gif" alt="mermaid2"></p>
 <h3 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本"></a>shell脚本</h3><h4 id="API格式"><a href="#API格式" class="headerlink" title="API格式"></a>API格式</h4><p>网上少有shell命令的api脚本，搜来搜去只有一个脚本，但试了试失效了，看了官方文档，格式都变了，按文档自己写的话， 中间有一个验证制作过程有点复杂，要把文件长度，密码，时间放一起算一个md5，对我来说有点难，光符号要求的时间格式，我最翻了很久的资料。最后无意中找到了一个官方的工具，得到一个简单的方式，也就没再研究了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">BUCKET=<span class="hljs-string">&quot; &quot;</span> <span class="hljs-comment"># 云存储服务的名称</span><br>r_path=<span class="hljs-string">&quot;/path/&quot;</span> <span class="hljs-comment"># 上传默认的路径</span><br>USERNAME=<span class="hljs-string">&quot; &quot;</span>  <span class="hljs-comment">#操作员名</span><br>PASSWORD=<span class="hljs-string">&quot; &quot;</span> <span class="hljs-comment"># 操作员密码</span><br>dt=`date -u +%a,<span class="hljs-string">&quot; &quot;</span>%d<span class="hljs-string">&quot; &quot;</span>%b<span class="hljs-string">&quot; &quot;</span>%Y<span class="hljs-string">&quot; &quot;</span>%T<span class="hljs-string">&quot; &quot;</span>GMT` <span class="hljs-comment">#时间戳</span><br>secret=`<span class="hljs-built_in">echo</span> -n <span class="hljs-variable">$&#123;PASSWORD&#125;</span> | md5sum | awk <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span>`  <span class="hljs-comment">#密码加密</span><br>domain=<span class="hljs-string">&quot; &quot;</span> <span class="hljs-comment"># 对象存储绑定的域名</span><br><span class="hljs-comment">#上传，-w %&#123;http_code&#125;是获取状态码</span><br>curl -X PUT http://v0.api.upyun.com/<span class="hljs-variable">$&#123;BUCKET&#125;</span><span class="hljs-variable">$&#123;r_path&#125;</span> -H <span class="hljs-string">&quot;Authorization: Basic <span class="hljs-variable">$&#123;auth_h&#125;</span>&quot;</span> -T <span class="hljs-string">&quot;&#123;<span class="hljs-variable">$r_fullname</span>&#125;&quot;</span>  -w %&#123;http_code&#125; -s<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">BUCKET=<span class="hljs-string">&quot; &quot;</span> <span class="hljs-comment"># 云存储服务的名称</span><br>r_path=<span class="hljs-string">&quot;/path/&quot;</span> <span class="hljs-comment"># 上传默认的路径</span><br>USERNAME=<span class="hljs-string">&quot; &quot;</span>  <span class="hljs-comment">#操作员名</span><br>PASSWORD=<span class="hljs-string">&quot; &quot;</span> <span class="hljs-comment"># 操作员密码</span><br>dt=`date -u +%a,<span class="hljs-string">&quot; &quot;</span>%d<span class="hljs-string">&quot; &quot;</span>%b<span class="hljs-string">&quot; &quot;</span>%Y<span class="hljs-string">&quot; &quot;</span>%T<span class="hljs-string">&quot; &quot;</span>GMT` <span class="hljs-comment">#时间戳</span><br>secret=`<span class="hljs-built_in">echo</span> -n <span class="hljs-variable">$&#123;PASSWORD&#125;</span> | md5sum | awk <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span>`  <span class="hljs-comment">#密码加密</span><br>domain=<span class="hljs-string">&quot; &quot;</span> <span class="hljs-comment"># 对象存储绑定的域名</span><br><span class="hljs-comment">#上传，-w %&#123;http_code&#125;是获取状态码</span><br>curl -X PUT http://v0.api.upyun.com/<span class="hljs-variable">$&#123;BUCKET&#125;</span><span class="hljs-variable">$&#123;r_path&#125;</span> -H <span class="hljs-string">&quot;Authorization: Basic <span class="hljs-variable">$&#123;auth_h&#125;</span>&quot;</span> -H <span class="hljs-string">&quot;x-gmkerl-thumb: /max/2500/rotate/auto/quality/80&quot;</span> -T <span class="hljs-string">&quot;&#123;<span class="hljs-variable">$r_fullname</span>&#125;&quot;</span>  -w %&#123;http_code&#125; -s<br></code></pre></div></td></tr></table></figure>
 
-
-
+<p>后期使用中发现在移动端有些照片不能自动修正旋转，于是加上一个预处理参数，顺便限定尺寸和压缩质量。参数是<em>x-gmkerl-thumb:</em> 详情参见<a target="_blank" rel="noopener" href="https://help.upyun.com/knowledge-base/image/#function">官方文件</a></p>
 <h4 id="路径处理"><a href="#路径处理" class="headerlink" title="路径处理"></a>路径处理</h4><p>第一个要处理的是文件路径，windows的文件路径与wsl的不同，需要转换，这部分就是字符串的处理。</p>
 <p>windows的路径是这样的</p>
 <figure class="highlight taggerscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs taggerscript">D:<span class="hljs-symbol">\t</span>emp<span class="hljs-symbol">\5</span>18c<span class="hljs-symbol">\i</span>mages<span class="hljs-symbol">\r</span>ace<span class="hljs-symbol">\p</span>r1.jpg<br></code></pre></div></td></tr></table></figure>
