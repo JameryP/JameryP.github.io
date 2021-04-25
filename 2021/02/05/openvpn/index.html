@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      429 字
+      445 字
     </span>
   
 
@@ -250,17 +250,10 @@
 <li><p>客户端网段不能与现有重复</p>
 </li>
 <li><p>推送是这样，如果想将所有流量都通过vpn服务器，可以保留默认设置。如果只是内网连接，外网不走服务器，可以调整一下。PUSH 选项的释义</p>
-<ul>
-<li><div class="hljs code-wrapper"><pre><code class="bash">route 192.XXX.XXX.0   #向远程的客户端推送路由表,就是服务器那边的内网段
-<figure class="highlight autohotkey"><table><tr><td class="gutter hljs"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs autohotkey"><br>- ```bash<br>  comp-lzo adaptive   #告知客户端使用LZO压缩<br></code></pre></div></td></tr></table></figure></code></pre>
-</li>
-<li><div class="hljs code-wrapper"><pre><code class="bash">dhcp-option DNS 192.XXX.XXX.10   #向远程的客户端推送DNS
-<figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm"><br>- ```<span class="hljs-keyword">bash</span><br><span class="hljs-keyword"> </span> redirect-gateway def1 <span class="hljs-keyword">bypass-dhcp </span> <span class="hljs-comment">#客户端网关重定向</span><br>  route-gateway <span class="hljs-number">172</span>.<span class="hljs-number">16</span>.<span class="hljs-number">30</span>.<span class="hljs-number">1</span>          <span class="hljs-comment">#向远程的客户端推送网关信息，所有的流量都通过VPN传输</span><br></code></pre></div></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">route 192.XXX.XXX.0   <span class="hljs-comment">#向远程的客户端推送路由表,就是服务器那边的内网段</span><br>comp-lzo adaptive   <span class="hljs-comment">#告知客户端使用LZO压缩</span><br>dhcp-option DNS 192.XXX.XXX.10   <span class="hljs-comment">#向远程的客户端推送DNS</span><br>redirect-gateway def1 bypass-dhcp  <span class="hljs-comment">#客户端网关重定向</span><br>route-gateway 172.16.30.1          <span class="hljs-comment">#向远程的客户端推送网关信息，所有的流量都通过VPN传输</span><br></code></pre></div></td></tr></table></figure>
 
 
-</code></pre>
-</li>
-</ul>
+
 </li>
 </ol>
 <p><img src="https://img.pluoluo.top/hexo/210205_openvpn.jpg" srcset="/img/loading.gif"></p>
@@ -268,7 +261,7 @@
 <h2 id="客户端设置"><a href="#客户端设置" class="headerlink" title="客户端设置"></a>客户端设置</h2><p>客户端安装，链接<a target="_blank" rel="noopener" href="https://swupdate.openvpn.org/community/releases/OpenVPN-2.5.0-I601-amd64.msi">在这</a> 或者<a target="_blank" rel="noopener" href="https://blog.alttt.com/downloads.php?site=1&file=202002669258294.zip&name=openvpn-install-2.4.8-I601-Win10.exe.zip">这里</a></p>
 <p>打开后导入服务器导出的文件，如果愿意要所在流量通过服务器，现在就可以用了。</p>
 <p>如果只想连接内网，外网不通过服务器，需要加几条，</p>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">route</span>-nopull             #忽略服务器的push设置中的route项<br><span class="hljs-attribute">route</span> <span class="hljs-number">192</span>.XXX.XXX.<span class="hljs-number">0</span> <span class="hljs-number">255.255.255.0</span>  vpn_gateway    #对端内网段通过vpn，其它的不通过。<br><span class="hljs-comment">#route 192.168.0.0 255.255.0.0 net_gateway         #使192.168.0.0/24网段，不走vpn网关</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean">route-nopull             #忽略服务器的push设置中的route项<br>route <span class="hljs-number">192.</span>XXX.XXX<span class="hljs-number">.0</span> <span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span>  vpn_gateway    #对端内网段通过vpn，其它的不通过。<br>#route <span class="hljs-number">192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> <span class="hljs-number">255.255</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> net_gateway         #使<span class="hljs-number">192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">24</span>网段，不走vpn网关<br>auth-nocache          #不把认证信息留在缓存中，不加这句，log中会有警告。<br></code></pre></div></td></tr></table></figure>
 
 
             </div>
@@ -305,6 +298,12 @@
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/04/25/%E4%B8%80%E4%B8%AA%E6%A2%A6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">即使在梦里也缘悭一面</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
