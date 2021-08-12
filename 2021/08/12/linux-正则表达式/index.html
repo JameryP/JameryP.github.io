@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.6k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      18
        分钟
     </span>
   
@@ -309,11 +309,39 @@
 <p>  正则表达式写为：<code>馃.*?(?=[A-Z])</code></p>
 <p>  下面<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qize/p/12887542.html">参考资料</a>。</p>
 <blockquote>
-<p>匹配两个字符串A与B中间的字符串包含A与B，比如AcakeB：<br>  表达式: <code>A.*B</code><em>（“.“表示任意字符，“</em>”表示匹配0个或多个）<br>  结果: AcakeB<br>  匹配两个字符串A与B中间的字符串包含A但是不包含B：<br>  表达式: <code>A.*?(?=B)</code>*<br>  结果: <a target="_blank" rel="noopener" href="http://awww.apizl.com/">Ac</a>ake<br>  匹配两个字符串A与B中间的字符串且不包含A与B：<br>  表达式: <code>(?&lt;=A).*?(?=B)</code><br>  结果: <a target="_blank" rel="noopener" href="http://www.baidu.com/">c</a>ake</p>
+<p>匹配两个字符串A与B中间的字符串包含A与B，比如AcakeB：<br>  表达式: <code>A.*B</code><em>（“.“表示任意字符，“</em>”表示匹配0个或多个）<br>  结果: AcakeB<br>  匹配两个字符串A与B中间的字符串包含A但是不包含B：<br>  表达式: <code>A.*?(?=B)</code>*<br>  结果: Acake<br>  匹配两个字符串A与B中间的字符串且不包含A与B：<br>  表达式: <code>(?&lt;=A).*?(?=B)</code><br>  结果: cke</p>
 </blockquote>
-<p>  <a target="_blank" rel="noopener" href="https://www.notion.so/c032d0ad7ee34e41ac25c99a71d6c4ce">正则 ?&lt;= 和 ?= 用法</a></p>
+<p>  正则 ?&lt;= 和 ?= 用法</p>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(?:pattern)</td>
+<td>非获取匹配，匹配 pattern 但不获取匹配结果，不进行存储供以后使用。这在使用或字符 “(</td>
+</tr>
+<tr>
+<td>(?=pattern)</td>
+<td>非获取匹配，正向肯定预查，在任何匹配 pattern 的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如，“Windows(?=95</td>
+</tr>
+<tr>
+<td>(?!pattern)</td>
+<td>非获取匹配，正向否定预查，在任何不匹配 pattern 的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如 “Windows(?!95</td>
+</tr>
+<tr>
+<td>(?&lt;=pattern)</td>
+<td>非获取匹配，反向肯定预查，与正向肯定预查类似，只是方向相反。例如，“(?&lt;=95</td>
+</tr>
+<tr>
+<td>(?&lt;!pattern)</td>
+<td>非获取匹配，反向否定预查，与正向否定预查类似，只是方向相反。例如 “(?&lt;!95</td>
+</tr>
+</tbody></table>
 
             </div>
             <hr>
