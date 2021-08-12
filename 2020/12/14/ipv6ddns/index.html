@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.5k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      20
        分钟
     </span>
   
@@ -237,6 +237,20 @@
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ipv6=$(ip addr show|grep -v deprecated|grep -A1 <span class="hljs-string">&#x27;inet6 [^f:]&#x27;</span>|sed -nr <span class="hljs-string">&#x27;:a;N;s#^ +inet6 ([a-f0-9:]+)/.+? scope global .*?valid_lft ([0-9]+sec) .*#\2 \1#p;ta&#x27;</span>|grep <span class="hljs-string">&#x27;ff:fe&#x27;</span>|sort -nr|head -n1|cut -d<span class="hljs-string">&#x27; &#x27;</span> -f2)<br></code></pre></div></td></tr></table></figure>
 
 <p>前现在的只能获取一条记录，这一句，筛选”ff:fe”，就没用了，删掉，成功！下面脚本已更新。</p>
+<p>2021/08/12，又出现获取地址失败，看来跟筛选没关系，ssh上去看，ip addr show也是获取不到，重启即可以，问题不在’ff:fe’上，于是在研究了一下这段脚本，sed这段看不懂，试着用另一个命令来抽取ipv6地址。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ip addr show eth0 | grep inet6 | awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span> | grep 2409 | sed <span class="hljs-string">&#x27;s/\// /g&#x27;</span> | awk <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span> | sort -nr | head -n1<br></code></pre></div></td></tr></table></figure>
+
+<p>理解一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ip addr show eth0 <span class="hljs-comment">#只看eth0接口地址</span><br>grep inet6        <span class="hljs-comment">#筛选包含inet6的行，也就是ipv6</span><br>awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span>  <span class="hljs-comment">#输出第二列，就是有地址那一列</span><br>grep 2409         <span class="hljs-comment">#筛选公网地址，就是匹配2409的，但是地址里带接口标志，用下两条给删掉</span><br>sed <span class="hljs-string">&#x27;s/\// /g&#x27;</span>    <span class="hljs-comment">#把/替换成空格</span><br>awk <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span>  <span class="hljs-comment">#输出第一列，这两条就是代替之前“sed”那段看不懂的命令的作用，换成我能理解的。</span><br>sort -nr          <span class="hljs-comment">#按长短排序，倒序，长的在前。</span><br>head -n1          <span class="hljs-comment">#取第一行。</span><br></code></pre></div></td></tr></table></figure>
+
+<p>学习上一句命令，发现用sed加awk来截取地址可以用cut一句代替。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">cut -d<span class="hljs-string">&#x27;/&#x27;</span> -f1   <span class="hljs-comment">#以&#x27;/&#x27;为分隔，取第一个值，这样就可以把地址截出来</span><br></code></pre></div></td></tr></table></figure>
+
+<p>最终是这句，下次上句再失效，就用这句替换试试。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ip addr show eth0 | grep inet6 | awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span> | grep 2409 | cut -d<span class="hljs-string">&#x27;/&#x27;</span> -f1 | sort -nr | head -n1<br></code></pre></div></td></tr></table></figure>
+
+
+
 <a id="more"></a>
 
 <h3 id="CloudFlare"><a href="#CloudFlare" class="headerlink" title="CloudFlare"></a>CloudFlare</h3><p>很久之前找以过dnspod的脚本，发现现在不工作了，现在经常用的一个域名挂在cloudflare，于是找到了一个脚本，试了很久都是出错，最后发现cloudflare关闭了对免费域名的API支持！！！</p>

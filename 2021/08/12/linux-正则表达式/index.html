@@ -17,7 +17,7 @@
   <meta name="description" content="一个私人博客">
   <meta name="author" content="净量">
   <meta name="keywords" content="">
-  <title>OpenVPN配置 - 珞珞博客</title>
+  <title>正则表达式 - 珞珞博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -162,7 +162,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="OpenVPN配置">
+            <span class="h2" id="subtitle" title="正则表达式">
               
             </span>
 
@@ -172,8 +172,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-05 17:50" pubdate>
-        2021年2月5日 下午
+      <time datetime="2021-08-12 12:10" pubdate>
+        2021年8月12日 中午
       </time>
     </span>
   
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      445 字
+      1.4k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      16
        分钟
     </span>
   
@@ -228,41 +228,92 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">OpenVPN配置</h1>
+            <h1 style="display: none">正则表达式</h1>
             
             <div class="markdown-body">
-              <p>就是爱折腾，明明没有更多需求了，还是研究了一下VPN的使用。</p>
-<!---more--->
-
-<h2 id="使用环境"><a href="#使用环境" class="headerlink" title="使用环境"></a>使用环境</h2><ul>
-<li>两边都有ipv6网络环境</li>
-<li>家里openwrt软路由作为旁路由，VPN就架设在这个设备上</li>
-<li>终端使用win10安装openvpn gui</li>
+              <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p>一直弄不懂正则表达式，搜集一下，以备学习。</p>
+<h1 id="基础释义"><a href="#基础释义" class="headerlink" title="基础释义"></a>基础释义</h1><ul>
+<li><p>匹配任意字符的写法</p>
+<p>  匹配特定数字：</p>
+<p>  <code>^[1-9]\d*$</code>　 　 //匹配正整数</p>
+<p>  <code>^-[1-9]\d*$</code> 　 //匹配负整数</p>
+<p>  <code>^-?[1-9]\d*$</code>　　 //匹配整数</p>
+<p>  <code>^[1-9]\d*|0$</code>　 //匹配非负整数（正整数 + 0）</p>
+<p>  <code>^-[1-9]\d*|0$</code>　　 //匹配非正整数（负整数 + 0）</p>
+<p>  <code>^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$</code>　　 //匹配正浮点数</p>
+<p>  <code>^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$</code>　 //匹配负浮点数</p>
+<p>  <code>^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$</code>　 //匹配浮点数</p>
+<p>  <code>^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$</code>　　 //匹配非负浮点数（正浮点数 + 0）</p>
+<p>  <code>^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$</code>　　//匹配非正浮点数（负浮点数 + 0）评注：处理大量数据时有用，具体应用时注意修正</p>
+<p>  匹配特定字符串：</p>
+<p>  <code>^[A-Za-z]+$</code>　　//匹配由26个英文字母组成的字符串</p>
+<p>  <code>^[A-Z]+$</code>　　//匹配由26个英文字母的大写组成的字符串</p>
+<p>  <code>^[a-z]+$</code>　　//匹配由26个英文字母的小写组成的字符串</p>
+<p>  <code>^[A-Za-z0-9]+$</code>　　//匹配由数字和26个英文字母组成的字符串</p>
+<p>  <code>^\w+$</code>　　//匹配由数字、26个英文字母或者下划线组成的字符串</p>
+<p>  <em>评注：最基本也是最常用的一些表达式</em></p>
+<p>  其它几个重要的元字符的使用方式。</p>
+<p>  <code>\s</code>：用于匹配单个空格符，包括tab键和换行符；</p>
+<p>  <code>\S</code>：用于匹配除单个空格符之外的所有字符；</p>
+<p>  <code>\d</code>：用于匹配从0到9的数字；</p>
+<p>  <code>\w</code>：用于匹配字母，数字或下划线字符；</p>
+<p>  <code>\W</code>：用于匹配所有与\w不匹配的字符；</p>
+<p>  <code>.</code> ：用于匹配除换行符之外的所有字符。</p>
+<p>  （说明：我们可以把\s和\S以及\w和\W看作互为逆运算）</p>
+<p>  下面，我们就通过实例看一下如何在正则表达式中使用上述</p>
+<p>  元字符。</p>
+<p>  <code>/\s+/</code> ：  上述正则表达式可以用于匹配目标对象中的一个或多个空格字符。</p>
+<p>  <code>/\d000/</code> ：  如果我们手中有一份复杂的财务报表，那么我们可以通过上述正则表达式轻而易举的查找到所有总额达千元的款项。</p>
+<hr>
+</li>
 </ul>
-<h2 id="服务器端"><a href="#服务器端" class="headerlink" title="服务器端"></a>服务器端</h2><p>主要配置点：</p>
-<ol>
-<li><p>协议，需要选TCP Server IPv6</p>
+<ul>
+<li><p>常用表达式示例</p>
+<p>  匹配中文字符的正则表达式： <code>[\u4e00-\u9fa5]</code><br>  <em>评注：匹配中文还真是个头疼的事，有了这个表达式就好办了</em></p>
+<p>  匹配双字节字符(包括汉字在内)：<code>[^\x00-\xff]</code><br>  <em>评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII字符计1）</em></p>
+<p>  匹配空白行的正则表达式：<code>\n\s*\r</code><br>  <em>评注：可以用来删除空白行</em></p>
+<p>  匹配HTML标记的正则表达式：<code>&lt;(\S*?)[^&gt;]*&gt;.*?&lt;/&gt;|&lt;.*? /&gt;</code><br>  <em>评注：网上流传的版本太糟糕，上面这个也仅仅能匹配部分，对于复杂的嵌套标记依旧无能为力</em></p>
+<p>  匹配首尾空白字符的正则表达式：<code>^\s*|\s*$</code><br>  <em>评注：可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式</em></p>
+<p>  匹配Email地址的正则表达式：<code>\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*</code><br>  评注：表单验证时很实用</p>
+<p>  匹配帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：<code>^[a-zA-Z][a-zA-Z0-9_]$</code><br>  <em>评注：表单验证时很实用</em></p>
+<p>  匹配网址URL的正则表达式：<code>[a-zA-z]+://[^\s]*</code><br>  <em>评注：网上流传的版本功能很有限，上面这个基本可以满足需求</em></p>
+<p>  匹配国内电话号码：<code>\d-\d|\d-\d</code><br>  <em>评注：匹配形式如 0511-4405222 或 021-87888822</em></p>
+<p>  匹配腾讯QQ号：<code>[1-9][0-9]</code><br>  <em>评注：腾讯QQ号从10000开始</em></p>
+<p>  匹配中国邮政编码：<code>[1-9]\d(?!\d)</code><br>  <em>评注：中国邮政编码为6位数字</em></p>
+<p>  匹配身份证：<code>\d|\d</code><br>  <em>评注：中国的身份证为15位或18位</em></p>
+<p>  匹配ip地址：<code>\d+\.\d+\.\d+\.\d+</code><br>  <em>评注：提取ip地址时有用</em></p>
+<hr>
 </li>
-<li><p>端口可改可不改</p>
+</ul>
+<ul>
+<li><p>元字符</p>
+<p>  <code>+</code> ：规定其前导字符必须在目标对象中连续出现一次或多次</p>
+<p>  <code>*</code> ：规定其前导字符必须在目标对象中出现零次或连续多次</p>
+<p>  <code>?</code> ：规定其前导对象必须在目标对象中连续出现零次或一次。</p>
+<p>  次数还可以用<code>&#123; &#125;</code>来精确指定，比如<code>&#123;4,6&#125;</code>，就是规定出现4到6次</p>
+<hr>
 </li>
-<li><p>ddns填入配置好的域名</p>
+</ul>
+<ul>
+<li><p>定位符</p>
+<p>  <code>^</code> ： 定位符规定匹配模式必须出现在目标字符开始</p>
+<p>  <code>$</code> ：定位符规定匹配模式必须出现在目标对象的结尾</p>
+<p>  <code>\b</code> ：定位符规定匹配模式必须出现在目标字符串的开头或结尾</p>
+<p>  <code>\B</code> ：定位符规定匹配模式可以出现在目标字符串的任意位置</p>
 </li>
-<li><p>客户端网段不能与现有重复</p>
+</ul>
+<h1 id="使用过的实例"><a href="#使用过的实例" class="headerlink" title="使用过的实例"></a>使用过的实例</h1><ul>
+<li><p>正则表达式匹配两个特殊字符中间的内容</p>
+<p>  有一份列表中有中文乱码，我要把乱码替换掉。</p>
+<p>  观察得知：乱码以“馃”开头，结尾会跟一个大写英文字母，英文需要保留。</p>
+<p>  正则表达式写为：<code>馃.*?(?=[A-Z])</code></p>
+<p>  下面<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qize/p/12887542.html">参考资料</a>。</p>
+<blockquote>
+<p>匹配两个字符串A与B中间的字符串包含A与B，比如AcakeB：<br>  表达式: <code>A.*B</code><em>（“.“表示任意字符，“</em>”表示匹配0个或多个）<br>  结果: AcakeB<br>  匹配两个字符串A与B中间的字符串包含A但是不包含B：<br>  表达式: <code>A.*?(?=B)</code>*<br>  结果: <a target="_blank" rel="noopener" href="http://awww.apizl.com/">Ac</a>ake<br>  匹配两个字符串A与B中间的字符串且不包含A与B：<br>  表达式: <code>(?&lt;=A).*?(?=B)</code><br>  结果: <a target="_blank" rel="noopener" href="http://www.baidu.com/">c</a>ake</p>
+</blockquote>
+<p>  <a target="_blank" rel="noopener" href="https://www.notion.so/c032d0ad7ee34e41ac25c99a71d6c4ce">正则 ?&lt;= 和 ?= 用法</a></p>
 </li>
-<li><p>推送是这样，如果想将所有流量都通过vpn服务器，可以保留默认设置。如果只是内网连接，外网不走服务器，可以调整一下。PUSH 选项的释义</p>
- <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">route 192.XXX.XXX.0   <span class="hljs-comment">#向远程的客户端推送路由表,就是服务器那边的内网段</span><br>comp-lzo adaptive   <span class="hljs-comment">#告知客户端使用LZO压缩</span><br>dhcp-option DNS 192.XXX.XXX.10   <span class="hljs-comment">#向远程的客户端推送DNS</span><br>redirect-gateway def1 bypass-dhcp  <span class="hljs-comment">#客户端网关重定向</span><br>route-gateway 172.16.30.1          <span class="hljs-comment">#向远程的客户端推送网关信息，所有的流量都通过VPN传输</span><br></code></pre></div></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<p><img src="https://img.pluoluo.top/hexo/210205_openvpn.jpg" srcset="/img/loading.gif"></p>
-<p>配置完了，点<em>一键下载.ovpn文件</em> ，保存文件，等下到客户端导入。</p>
-<h2 id="客户端设置"><a href="#客户端设置" class="headerlink" title="客户端设置"></a>客户端设置</h2><p>客户端安装，链接<a target="_blank" rel="noopener" href="https://swupdate.openvpn.org/community/releases/OpenVPN-2.5.0-I601-amd64.msi">在这</a> 或者<a target="_blank" rel="noopener" href="https://blog.alttt.com/downloads.php?site=1&file=202002669258294.zip&name=openvpn-install-2.4.8-I601-Win10.exe.zip">这里</a></p>
-<p>打开后导入服务器导出的文件，如果愿意要所在流量通过服务器，现在就可以用了。</p>
-<p>如果只想连接内网，外网不通过服务器，需要加几条，</p>
-<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean">route-nopull             #忽略服务器的push设置中的route项<br>route <span class="hljs-number">192.</span>XXX.XXX<span class="hljs-number">.0</span> <span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span>  vpn_gateway    #对端内网段通过vpn，其它的不通过。<br>#route <span class="hljs-number">192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> <span class="hljs-number">255.255</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> net_gateway         #使<span class="hljs-number">192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">24</span>网段，不走vpn网关<br>auth-nocache          #不把认证信息留在缓存中，不加这句，log中会有警告。<br></code></pre></div></td></tr></table></figure>
-
+</ul>
 
             </div>
             <hr>
@@ -272,7 +323,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
+                      <a class="hover-with-bg" href="/categories/linux/">linux</a>
                     
                   </div>
                 
@@ -282,11 +333,7 @@
                     
                       <a class="hover-with-bg" href="/tags/linux/">linux</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">内网穿透</a>
-                    
-                      <a class="hover-with-bg" href="/tags/nps/">nps</a>
-                    
-                      <a class="hover-with-bg" href="/tags/vpn/">vpn</a>
+                      <a class="hover-with-bg" href="/tags/%E8%84%9A%E6%9C%AC/">脚本</a>
                     
                   </div>
                 
@@ -299,18 +346,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/12/linux-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">正则表达式</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/02/linux%E8%BF%9C%E7%A8%8B%E5%8F%91%E5%B8%83%E5%8D%9A%E5%AE%A2/">
-                        <span class="hidden-mobile">远程连接服务器发布博客</span>
+                      <a href="/2021/02/05/openvpn/">
+                        <span class="hidden-mobile">OpenVPN配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
